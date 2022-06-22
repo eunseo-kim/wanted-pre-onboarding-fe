@@ -14,11 +14,13 @@
   "plugins": ["react"],
   "rules": {   
     "quotes": ["error", "single", { "avoidEscape": true }],
+    "indent": ["error", 2],
     "max-len": [2, 120, {
       "ignoreStrings": true,
       "ignoreComments": true
-    }    
+    },
   ],
-  "react/prop-types":0
+  "react/prop-types":0,
+  "react/react-in-jsx-scope": "off"
 }
 }
