@@ -17,6 +17,9 @@ const Wrapper = styled.div({
   position: 'fixed',
   justifyContent: 'space-around',
   borderBottom: '1px solid lightgray',
+  '@media (max-width: 767px)': {
+    justifyContent: 'space-between',
+  }
 });
 
 const RightSide = styled.div({

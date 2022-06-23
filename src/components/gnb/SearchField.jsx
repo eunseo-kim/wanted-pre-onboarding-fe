@@ -9,19 +9,20 @@ const SearchFieldBox = styled.div({
   verticalAlign: 'center',
   borderRadius: '5px',
   backgroundColor: '#f3f3f3',
-  '& svg': {
-    height: '100%',
-  },
-  '& input': {
-    backgroundColor: 'transparent',
+  '@media (max-width: 767px)': {
+    display: 'none',
   }
+});
+
+const InputField = styled.input({
+  backgroundColor: 'transparent',
 });
 
 export default function SearchField() {
   return (
     <SearchFieldBox>
-      <AiOutlineSearch/>
-      <input placeholder="검색"/>
+      <AiOutlineSearch height='100%'/>
+      <InputField placeholder="검색"/>
     </SearchFieldBox>
   )
 }
