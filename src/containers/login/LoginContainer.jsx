@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { saveItem } from '../../fixtures/storage';
+import { saveItem } from '../../services/storage';
 
 export default function LoginContainer({ username, password }) {
   const navigate = useNavigate();
