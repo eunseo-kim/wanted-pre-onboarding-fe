@@ -1,9 +1,14 @@
+import { useNavigate } from 'react-router-dom';
+
+import styled from '@emotion/styled';
+
 import Logo from '../../components/common/Logo';
 import SearchField from '../../components/gnb/SearchField';
+import LogoutButton from '../../components/gnb/LogoutButton';
 
 import { AiFillHome, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai';
 
-import styled from '@emotion/styled';
+import { removeItem  } from '../../services/storage';
 
 const Wrapper = styled.div({
   width: '100vw',
@@ -21,6 +26,14 @@ const RightSide = styled.div({
 });
 
 export default function GnbContainer() {
+  const navigate = useNavigate();
+
+  const handleClickLogout = () => {
+    removeItem('username');
+    removeItem('password');
+    navigate('/login');
+  }
+
   return (
     <Wrapper>
       <Logo size='100px'/>
@@ -29,6 +42,8 @@ export default function GnbContainer() {
         <AiFillHome fontSize='25px'/>
         <AiOutlineHeart fontSize='25px'/>
         <AiOutlineSend fontSize='25px'/>
+        <LogoutButton 
+          onClickLogout={handleClickLogout}/>
       </RightSide>
     </Wrapper>
   )

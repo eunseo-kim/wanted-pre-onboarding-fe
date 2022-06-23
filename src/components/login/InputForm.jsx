@@ -24,6 +24,7 @@ export default function Inputform({ info, placeholder }) {
         id={id}
         name={name}
         ref={ref}
+        autocomplete='off'
         placeholder={placeholder}/>
     </InputFormBox>
   )
