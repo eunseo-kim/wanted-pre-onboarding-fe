@@ -1,7 +1,7 @@
 import { loadItem } from '../fixtures/storage';
 
 import LoginContainer from '../containers/login/LoginContainer'
-import Logo from '../components/login/Logo'
+import Logo from '../components/common/Logo';
 
 export default function LoginPage() {
   const username = loadItem('username') || '';
@@ -29,7 +29,8 @@ export default function LoginPage() {
           backgroundColor: 'white',
           border: '1px solid lightgray',
         }}>
-        <Logo/>
+        <Logo
+          size='70%'/>
         <LoginContainer
           username={username}
           password={password}/>
