@@ -15,7 +15,7 @@ const InputField = styled.input({
 });
 
 export default function Inputform({ info, placeholder }) {
-  const {type, id, name, ref} = info;
+  const { type, id, name, ref } = info;
     
   return (
     <InputFormBox>

@@ -1,53 +1,89 @@
 import Inputform from '../../components/login/InputForm';
 import LoginButton from '../../components/login/LoginButton';
+import ValidationCheckBox from '../../components/login/ValidationCheckBox';
+import CheckPasswordValidation from '../../components/login/CheckPasswordValidation';
 
-import { useEffect, useRef } from 'react';
+import { checkEmailValidation, checkPasswordValidation } from '../../services/validation'; 
+
+import { useEffect, useRef, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
 import { saveItem } from '../../services/storage';
 
-export default function LoginContainer({ username, password }) {
+import styled from 'styled-components';
+
+const Wrapper = styled.div({
+  display: 'flex',
+  width: '100%',
+  verticalAlign: 'center'
+});
+
+export default function LoginContainer({ email, password }) {
   const navigate = useNavigate();
 
-  const usernameRef = useRef(null);
+  const emailRef = useRef(null);
   const passwordRef = useRef(null);
-
+  
   useEffect(() => {
-    usernameRef.current.value = username;
+    emailRef.current.value = email;
     passwordRef.current.value = password;
   }, []);
   
+  const [errorCodes, setErrorCodes] = useState()
+  const [emailValidation, setEmailValidation] = useState()
+
+  useEffect(() => {
+    if (emailValidation && errorCodes.length === 0) {
+      saveItem('email', emailRef.current.value);
+      saveItem('password', passwordRef.current.value);
+      navigate('/');
+    }
+  }, [errorCodes, emailValidation]);
+  
   const handleSubmit = () => {
-    const username = usernameRef.current.value;
-    const password = passwordRef.current.value;
-
-    saveItem('username', username);
-    saveItem('password', password);
-
-    navigate('/');
+    setEmailValidation(checkEmailValidation(emailRef.current.value));
+    setErrorCodes(checkPasswordValidation(passwordRef.current.value));
   };
 
   return (
     <>
-      <Inputform
-        info={{
-          type: 'username',
-          id: 'username',
-          name: 'username',
-          ref: usernameRef
-        }}
-        placeholder="전화번호, 사용자 이름 또는 이메일"/>
-      <Inputform
-        info={{
-          type: 'password',
-          id: 'password',
-          name: 'password',
-          ref: passwordRef
-        }}
-        placeholder="비밀번호"/>
-      <LoginButton 
-        onSubmit={handleSubmit}/>
+      <Wrapper>
+        <Inputform
+          info={{
+            type: 'email',
+            id: 'email',
+            name: 'email',
+            ref: emailRef
+          }}
+          placeholder="전화번호, 사용자 이름 또는 이메일"
+        />
+        <ValidationCheckBox
+          validation={emailValidation}
+        />
+      </Wrapper>
+      <Wrapper>
+        <Inputform
+          info={{
+            type: 'password',
+            id: 'password',
+            name: 'password',
+            ref: passwordRef
+          }}
+          placeholder="비밀번호"
+        />
+        <ValidationCheckBox
+          validation={errorCodes ? errorCodes.length === 0 : errorCodes}
+        />
+      </Wrapper>
+      <Wrapper>
+        <CheckPasswordValidation
+          errorCodes={errorCodes ? errorCodes : [1, 2, 3]}
+        />
+      </Wrapper>
+      <LoginButton
+        onSubmit={handleSubmit}
+      />
     </>
   )
 }

@@ -4,7 +4,6 @@ import { loadItem } from '../services/storage';
 
 import LoginContainer from '../containers/login/LoginContainer'
 import Logo from '../components/common/Logo';
-import { useEffect } from 'react';
 
 const Wrapper = styled.div({
   width: '100vw',
@@ -28,7 +27,7 @@ const LoginFieldBox = styled.div({
 });
 
 export default function LoginPage() {
-  const username = loadItem('username') || '';
+  const email = loadItem('email') || '';
   const password = loadItem('password') || '';
 
   return (
@@ -36,7 +35,7 @@ export default function LoginPage() {
       <LoginFieldBox>
         <Logo size='70%'/>
         <LoginContainer
-          username={username}
+          email={email}
           password={password}/>
       </LoginFieldBox>
     </Wrapper>
