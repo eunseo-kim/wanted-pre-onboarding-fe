@@ -26,18 +26,26 @@ export default function LoginContainer({ email, password }) {
   const passwordRef = useRef(null);
   const [emailValidation, setEmailValidation] = useState();
   const [errorCodes, setErrorCodes] = useState();
+  const [disabled, setDisabled] = useState(true);
   
   useEffect(() => {
     emailRef.current.value = email;
     passwordRef.current.value = password;
   }, []);
 
+  useEffect(() => {
+    if (emailValidation && errorCodes && errorCodes.length === 0) {
+      return setDisabled(false);
+    }
+    setDisabled(true);
+  }, [emailValidation, errorCodes]);
+
   const handleChangeEmail = () => {
     setEmailValidation(checkEmailValidation(emailRef.current.value));
   }
 
   const handleChangePassword = () => {
-    setErrorCodes(checkPasswordValidation(passwordRef.current.value))
+    setErrorCodes(checkPasswordValidation(passwordRef.current.value));
   }
     
   const handleSubmit = () => {
@@ -86,6 +94,7 @@ export default function LoginContainer({ email, password }) {
         />
       </Wrapper>
       <LoginButton
+        disabled={disabled}
         onSubmit={handleSubmit}
       />
     </>
