@@ -24,26 +24,28 @@ export default function LoginContainer({ email, password }) {
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const [emailValidation, setEmailValidation] = useState();
+  const [errorCodes, setErrorCodes] = useState();
   
   useEffect(() => {
     emailRef.current.value = email;
     passwordRef.current.value = password;
   }, []);
-  
-  const [errorCodes, setErrorCodes] = useState()
-  const [emailValidation, setEmailValidation] = useState()
 
-  useEffect(() => {
+  const handleChangeEmail = () => {
+    setEmailValidation(checkEmailValidation(emailRef.current.value));
+  }
+
+  const handleChangePassword = () => {
+    setErrorCodes(checkPasswordValidation(passwordRef.current.value))
+  }
+    
+  const handleSubmit = () => {
     if (emailValidation && errorCodes.length === 0) {
       saveItem('email', emailRef.current.value);
       saveItem('password', passwordRef.current.value);
       navigate('/');
     }
-  }, [errorCodes, emailValidation]);
-  
-  const handleSubmit = () => {
-    setEmailValidation(checkEmailValidation(emailRef.current.value));
-    setErrorCodes(checkPasswordValidation(passwordRef.current.value));
   };
 
   return (
@@ -56,6 +58,7 @@ export default function LoginContainer({ email, password }) {
             name: 'email',
             ref: emailRef
           }}
+          onChange={handleChangeEmail}
           placeholder="전화번호, 사용자 이름 또는 이메일"
         />
         <ValidationCheckBox
@@ -70,6 +73,7 @@ export default function LoginContainer({ email, password }) {
             name: 'password',
             ref: passwordRef
           }}
+          onChange={handleChangePassword}
           placeholder="비밀번호"
         />
         <ValidationCheckBox
