@@ -1,17 +1,18 @@
-import Inputform from '../../components/login/InputForm';
-import LoginButton from '../../components/login/LoginButton';
-import ValidationCheckBox from '../../components/login/ValidationCheckBox';
-import CheckPasswordValidation from '../../components/login/CheckPasswordValidation';
-
-import { checkEmailValidation, checkPasswordValidation } from '../../services/validation'; 
-
 import { useEffect, useRef, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { saveItem } from '../../services/storage';
-
 import styled from 'styled-components';
+
+import Inputform from '../../components/login/InputForm';
+import LoginButton from '../../components/login/LoginButton';
+import LoginToastMessage from '../../components/login/LoginToastMessage';
+import ValidationCheckBox from '../../components/login/ValidationCheckBox';
+import CheckPasswordValidation from '../../components/login/CheckPasswordValidation';
+
+import { checkEmailValidation, checkPasswordValidation } from '../../services/validation'; 
+import { saveItem } from '../../services/storage';
+import { Admin } from '../../fixtures/admin';
 
 const Wrapper = styled.div({
   display: 'flex',
@@ -27,6 +28,7 @@ export default function LoginContainer({ email, password }) {
   const [emailValidation, setEmailValidation] = useState();
   const [errorCodes, setErrorCodes] = useState();
   const [disabled, setDisabled] = useState(true);
+  const [toastMessageVisible, setToastMessageVisible] = useState(false);
   
   useEffect(() => {
     emailRef.current.value = email;
@@ -40,6 +42,12 @@ export default function LoginContainer({ email, password }) {
     setDisabled(true);
   }, [emailValidation, errorCodes]);
 
+  useEffect(() => {
+    setTimeout(function() {
+      setToastMessageVisible(false);
+    }, 3000)
+  }, [toastMessageVisible]);
+
   const handleChangeEmail = () => {
     setEmailValidation(checkEmailValidation(emailRef.current.value));
   }
@@ -49,16 +57,27 @@ export default function LoginContainer({ email, password }) {
   }
     
   const handleSubmit = () => {
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
     if (emailValidation && errorCodes.length === 0) {
-      saveItem('email', emailRef.current.value);
-      saveItem('password', passwordRef.current.value);
-      navigate('/');
+      /* 이메일 정보가 Admin과 일치하는지 확인 */
+      if (email === Admin.email && password === Admin.password) {
+        saveItem('email', email);
+        saveItem('password', password);
+        navigate('/');
+      } else {
+        setToastMessageVisible(true);
+      }
     }
   };
 
   return (
     <>
       <Wrapper>
+        <LoginToastMessage
+          visible={toastMessageVisible}
+        />
         <Inputform
           info={{
             type: 'email',
@@ -67,7 +86,7 @@ export default function LoginContainer({ email, password }) {
             ref: emailRef
           }}
           onChange={handleChangeEmail}
-          placeholder="전화번호, 사용자 이름 또는 이메일"
+          placeholder="[테스트용] test@test.com"
         />
         <ValidationCheckBox
           validation={emailValidation}
@@ -82,7 +101,7 @@ export default function LoginContainer({ email, password }) {
             ref: passwordRef
           }}
           onChange={handleChangePassword}
-          placeholder="비밀번호"
+          placeholder="[테스트용] Helloworld!"
         />
         <ValidationCheckBox
           validation={errorCodes ? errorCodes.length === 0 : errorCodes}
