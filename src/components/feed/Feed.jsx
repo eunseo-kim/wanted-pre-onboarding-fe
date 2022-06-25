@@ -101,13 +101,25 @@ export default function Feed({ feed }) {
     loadImage(img, setImageSrc)
   }, []);
 
-  const handleClick = () => {
+  function addNewComment() {
     const newComment = commentRef.current.value;
     setCommentList([...commentList, {
       'name': 'admin', 
       'comment': newComment
     }]);
     commentRef.current.value = '';
+  }
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter' && commentRef.current.value !== '') {
+      addNewComment();
+    }
+  }
+
+  const handleClick = () => {
+    if (commentRef.current.value !== '') {
+      addNewComment();
+    }
   }
 
   return (
@@ -151,6 +163,7 @@ export default function Feed({ feed }) {
         <FaRegSmile size={18}/>
         <InputField
           placeholder="댓글달기..."
+          onKeyPress={handleKeyPress}
           ref={commentRef}
         />
         <PostingButton

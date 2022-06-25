@@ -1,9 +1,6 @@
-import { useState, useEffect } from 'react';
-
 import styled from '@emotion/styled';
 
 import Feed from '../components/feed/Feed';
-
 
 const Wrapper = styled.div({
   position: 'relative',
@@ -12,6 +9,9 @@ const Wrapper = styled.div({
   margin: '0 auto',
   paddingTop: '60px',
   width: '470px',
+  '@media (max-width: 480px)': {
+    width: '100%',
+  }
 });
 
 export default function FeedContainer({ feeds }) {

@@ -20,7 +20,7 @@ const Wrapper = styled.div({
   justifyContent: 'space-around',
   borderBottom: '1px solid lightgray',
   boxShadow: 'rgba(99, 99, 99, 0.1) 0px 2px 8px 0px',
-  '@media (max-width: 767px)': {
+  '@media (max-width: 480px)': {
     justifyContent: 'space-between',
   }
 });
