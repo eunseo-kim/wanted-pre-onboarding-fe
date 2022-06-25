@@ -40,7 +40,7 @@ export default function LoginContainer({ email, password }) {
   useEffect(() => {
     setTimeout(function() {
       setToastMessageVisible(false);
-    }, 3000)
+    }, 2000);
   }, [toastMessageVisible]);
 
   const handleChangeEmail = () => {
