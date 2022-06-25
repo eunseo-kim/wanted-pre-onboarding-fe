@@ -20,9 +20,7 @@ const Wrapper = styled.div({
   verticalAlign: 'center'
 });
 
-export default function LoginContainer({ email, password }) {
-  const navigate = useNavigate();
-
+export default function LoginContainer({ setEmail }) {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [emailValidation, setEmailValidation] = useState();
@@ -58,9 +56,9 @@ export default function LoginContainer({ email, password }) {
     if (emailValidation && errorCodes.length === 0) {
       /* 이메일 정보가 Admin과 일치하는지 확인 */
       if (email === Admin.email && password === Admin.password) {
+        setEmail(email);
         saveItem('email', email);
         saveItem('password', password);
-        navigate('/');
       } else {
         setToastMessageVisible(true);
       }

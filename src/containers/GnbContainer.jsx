@@ -28,10 +28,11 @@ const RightSide = styled.div({
   alignItems: 'center',
 });
 
-export default function GnbContainer() {
+export default function GnbContainer({ setEmail }) {
   const navigate = useNavigate();
 
   const handleClickLogout = () => {
+    setEmail(null);
     removeItem('email');
     removeItem('password');
     navigate('/login');
@@ -45,7 +46,7 @@ export default function GnbContainer() {
         <AiFillHome fontSize='25px'/>
         <AiOutlineHeart fontSize='25px'/>
         <AiOutlineSend fontSize='25px'/>
-        <LogoutButton 
+        <LogoutButton
           onClickLogout={handleClickLogout}/>
       </RightSide>
     </Wrapper>
