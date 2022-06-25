@@ -94,7 +94,7 @@ export default function LoginContainer({ setEmail }) {
             ref: passwordRef
           }}
           onChange={handleChangePassword}
-          placeholder="[테스트용] Helloworld!"
+          placeholder="[테스트용] HelloWorld!"
         />
         <ValidationCheckBox
           validation={errorCodes ? errorCodes.length === 0 : errorCodes}
