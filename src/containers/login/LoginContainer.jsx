@@ -31,11 +31,6 @@ export default function LoginContainer({ email, password }) {
   const [toastMessageVisible, setToastMessageVisible] = useState(false);
   
   useEffect(() => {
-    emailRef.current.value = email;
-    passwordRef.current.value = password;
-  }, []);
-
-  useEffect(() => {
     if (emailValidation && errorCodes && errorCodes.length === 0) {
       return setDisabled(false);
     }
