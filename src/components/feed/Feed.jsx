@@ -38,7 +38,11 @@ const UserField = styled.div({
 });
 
 const Image = styled.div({
-
+  maxHeight: '500px',
+  overflow: 'hidden',
+  '& img': {
+    width: '100%',
+  }
 });
 
 const ToolBar = styled.div({
