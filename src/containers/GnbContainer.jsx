@@ -2,13 +2,13 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from '@emotion/styled';
 
-import Logo from '../../components/common/Logo';
-import SearchField from '../../components/gnb/SearchField';
-import LogoutButton from '../../components/gnb/LogoutButton';
+import Logo from '../components/common/Logo';
+import SearchField from '../components/gnb/SearchField';
+import LogoutButton from '../components/gnb/LogoutButton';
 
 import { AiFillHome, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai';
 
-import { removeItem  } from '../../services/storage';
+import { removeItem  } from '../services/storage';
 
 const Wrapper = styled.div({
   width: '100vw',

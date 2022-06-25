@@ -1,4 +1,4 @@
-import GnbContainer from '../containers/gnb/GnbContainer';
+import GnbContainer from '../containers/GnbContainer';
 
 export default function MainPage() {
   return (

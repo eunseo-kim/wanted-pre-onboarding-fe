@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import Inputform from '../../components/login/InputForm';
-import LoginButton from '../../components/login/LoginButton';
-import LoginToastMessage from '../../components/login/LoginToastMessage';
-import ValidationCheckBox from '../../components/login/ValidationCheckBox';
-import CheckPasswordValidation from '../../components/login/CheckPasswordValidation';
+import Inputform from '../components/login/InputForm';
+import LoginButton from '../components/login/LoginButton';
+import LoginToastMessage from '../components/login/LoginToastMessage';
+import ValidationCheckBox from '../components/login/ValidationCheckBox';
+import CheckPasswordValidation from '../components/login/CheckPasswordValidation';
 
-import { checkEmailValidation, checkPasswordValidation } from '../../services/validation'; 
-import { saveItem } from '../../services/storage';
-import { Admin } from '../../fixtures/admin';
+import { checkEmailValidation, checkPasswordValidation } from '../services/validation'; 
+import { saveItem } from '../services/storage';
+import { Admin } from '../fixtures/admin';
 
 const Wrapper = styled.div({
   display: 'flex',

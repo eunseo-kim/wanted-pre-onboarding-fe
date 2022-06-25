@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 import { loadItem } from '../services/storage';
 
-import LoginContainer from '../containers/login/LoginContainer'
+import LoginContainer from '../containers/LoginContainer'
 import Logo from '../components/common/Logo';
 
 const Wrapper = styled.div({
