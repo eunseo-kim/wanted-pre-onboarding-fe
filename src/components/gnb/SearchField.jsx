@@ -9,7 +9,7 @@ const SearchFieldBox = styled.div({
   verticalAlign: 'center',
   borderRadius: '5px',
   backgroundColor: '#f3f3f3',
-  '@media (max-width: 767px)': {
+  '@media (max-width: 480px)': {
     display: 'none',
   }
 });
