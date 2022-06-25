@@ -1,9 +1,9 @@
-import GnbContainer from '../containers/gnb/GnbContainer';
+import GnbContainer from '../containers/GnbContainer';
 
-export default function MainPage() {
+export default function MainPage({ setEmail }) {
   return (
-    <div>
-      <GnbContainer/>
-    </div>
+    <>
+      <GnbContainer setEmail={setEmail}/>
+    </>
   )
 }

@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import Inputform from '../../components/login/InputForm';
-import LoginButton from '../../components/login/LoginButton';
-import LoginToastMessage from '../../components/login/LoginToastMessage';
-import ValidationCheckBox from '../../components/login/ValidationCheckBox';
-import CheckPasswordValidation from '../../components/login/CheckPasswordValidation';
+import Inputform from '../components/login/InputForm';
+import LoginButton from '../components/login/LoginButton';
+import LoginToastMessage from '../components/login/LoginToastMessage';
+import ValidationCheckBox from '../components/login/ValidationCheckBox';
+import CheckPasswordValidation from '../components/login/CheckPasswordValidation';
 
-import { checkEmailValidation, checkPasswordValidation } from '../../services/validation'; 
-import { saveItem } from '../../services/storage';
-import { Admin } from '../../fixtures/admin';
+import { checkEmailValidation, checkPasswordValidation } from '../services/validation'; 
+import { saveItem } from '../services/storage';
+import { Admin } from '../fixtures/admin';
 
 const Wrapper = styled.div({
   display: 'flex',
@@ -20,9 +20,7 @@ const Wrapper = styled.div({
   verticalAlign: 'center'
 });
 
-export default function LoginContainer({ email, password }) {
-  const navigate = useNavigate();
-
+export default function LoginContainer({ setEmail }) {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [emailValidation, setEmailValidation] = useState();
@@ -58,9 +56,9 @@ export default function LoginContainer({ email, password }) {
     if (emailValidation && errorCodes.length === 0) {
       /* 이메일 정보가 Admin과 일치하는지 확인 */
       if (email === Admin.email && password === Admin.password) {
+        setEmail(email);
         saveItem('email', email);
         saveItem('password', password);
-        navigate('/');
       } else {
         setToastMessageVisible(true);
       }
@@ -96,7 +94,7 @@ export default function LoginContainer({ email, password }) {
             ref: passwordRef
           }}
           onChange={handleChangePassword}
-          placeholder="[테스트용] Helloworld!"
+          placeholder="[테스트용] HelloWorld!"
         />
         <ValidationCheckBox
           validation={errorCodes ? errorCodes.length === 0 : errorCodes}
