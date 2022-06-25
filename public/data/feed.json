@@ -33,7 +33,7 @@
     {
         "id": 3,
         "username": "user_03",
-        "img": "https://source.unsplash.com/random/300x600",
+        "img": "https://source.unsplash.com/random/400x600",
         "thumbs_up": 10,
         "comments": [
             {

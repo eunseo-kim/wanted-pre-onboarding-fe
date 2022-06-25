@@ -20,7 +20,8 @@ const FeedBox = styled.div(
     margin: '15px',
     fontSize: '14px',
     backgroundColor: 'white',
-    border: '1px solid gray',
+    borderRadius: '7px',
+    border: '1px solid lightgray',
   });
 
 const Header = styled.div({
