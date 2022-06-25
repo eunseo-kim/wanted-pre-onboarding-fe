@@ -14,9 +14,9 @@ const InputField = styled.input({
   backgroundColor: 'transparent',
 });
 
-export default function Inputform({ info, placeholder }) {
-  const {type, id, name, ref} = info;
-    
+export default function Inputform({ info, placeholder, onChange }) {
+  const { type, id, name, ref } = info;
+
   return (
     <InputFormBox>
       <InputField
@@ -25,6 +25,7 @@ export default function Inputform({ info, placeholder }) {
         name={name}
         ref={ref}
         autocomplete='off'
+        onChange={onChange}
         placeholder={placeholder}/>
     </InputFormBox>
   )

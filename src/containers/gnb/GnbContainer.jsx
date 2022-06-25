@@ -32,7 +32,7 @@ export default function GnbContainer() {
   const navigate = useNavigate();
 
   const handleClickLogout = () => {
-    removeItem('username');
+    removeItem('email');
     removeItem('password');
     navigate('/login');
   }
