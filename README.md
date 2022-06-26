@@ -1,93 +1,113 @@
-# :: 원티드 프리온보딩 프론트엔드 코스 사전과제
+# 👩🏻소개
+안녕하세요. 원티드 프리온보딩 프론트엔드 코스에 지원한 김은서입니다.
+저는 현재 프론트엔드 개발자를 꿈꾸는 학생입니다. 이번 원티드 프리온보딩코스가 제가 프론트엔드 개발자로 성장하는데 있어서 정말 좋은 기회라는 생각이 들어 지원하게 되었습니다. 잘 부탁드립니다 :)
 
-## Quick Overview
+<br/>
 
+# 🌱과제 해결 방법
+<details><summary>과제 전체 구조</summary>
+  
 ```
-npm install
-
-npm start
+└─src
+    ├─  App.js
+    ├─  index.js
+    │
+    ├─components
+    │  ├─common
+    │  │      Logo.jsx
+    │  │
+    │  ├─feed
+    │  │      Feed.jsx
+    │  │
+    │  ├─gnb
+    │  │      LogoutButton.jsx
+    │  │      SearchField.jsx
+    │  │
+    │  └─login
+    │          CheckPasswordValidation.jsx
+    │          InputForm.jsx
+    │          LoginButton.jsx
+    │          LoginToastMessage.jsx
+    │          ValidationCheckBox.jsx
+    │
+    ├─containers
+    │      FeedContainer.jsx
+    │      GnbContainer.jsx
+    │      LoginContainer.jsx
+    │
+    ├─fixtures
+    │      admin.js
+    │
+    ├─image
+    │      Logo.svg
+    │
+    ├─pages
+    │      LoginPage.jsx
+    │      MainPage.jsx
+    │      PreAssignmentGuide.jsx
+    │
+    ├─services
+    │      api.js
+    │      storage.js
+    │      validation.js
+    │
+    └─styles
+            globalStyles.js
 ```
+</details>
 
-\*\* React를 구동할 수 있는 기본적인 환경이 필요합니다.
+### Assignment 1 - Login
+- [**Assignment 1 - Login 풀리퀘스트**](https://github.com/eunseo-kim/wanted-pre-onboarding-fe/pull/1)
+- input의 `onChange` 함수 대신 `useRef`를 사용하여 렌더링 최적화를 구현했습니다.
+- 로그인 시 localStorage에 로그인 정보를 저장했습니다.
+- localStorage와 관련된 함수(saveItem/loadItem/removeItem)는 `src/services`에 `storage.js`으로 분리하여 구현했습니다.
 
-## 진행 가이드
+### Assignment 2 - GNB
+- [**Assignment 2 - GNB 풀리퀘스트**](https://github.com/eunseo-kim/wanted-pre-onboarding-fe/pull/2)
+- 스크롤에 관계 없이 화면 상단에 고정하도록 GNB의 `position` 속성을 `fixed`로 구현했습니다.
+- GNB의 가장 오른쪽에 로그아웃 버튼을 배치했습니다. 로그아웃 버튼 클릭 시, localStorage에 저장된 email/password를 삭제합니다.
+- 모바일 사이즈(480px 이하)의 경우
+  - 가운데 검색창의 `display` 속성을 `none`으로 설정하여 보이지 않도록 구현했습니다.
+  - GNB 전체를 감싸는 부분의 `justify-content` 속성을 `space-between`으로 설정했습니다.
 
-- 위의 Repository를 포크(`fork`) 하여 개발 URL 제출해주세요.
-  - [URL 제출 링크](https://forms.gle/LcXnfrgtQp5MRrdU8)
-- fork 레파지토리 명은 `wanted-pre-onboarding-fe`로 생성해 주세요.
-- 과제 수행 개수에 따라 기본적인 평가가 이루어집니다.
-- 코드의 일관성, 가독성, 함수 분리,컴포넌트 설계, 코드 퀄리티 등을 기준으로 세부적인 평가가 이루어집니다.
-- 해당 과제에 대한 해설은 개강 후 진행될 예정입니다.
-- 선발하는 과정에서 최소한의 수준을 평가하기 위한 과제로 아래 Assignment 외 다른 부분을 완벽하게 구현하지 않으셔도 됩니다. (평가에 반영하지 않습니다.)
-- README.md를 꼭 작성해 주세요. 본인에 대한 소개나 과제 풀이에 관한 것 등 자유롭게 작성해주시면 됩니다.
-- 함수형 컴포넌트로 개발해주세요. (React Hooks)
+### Assignment 3 - Validation
+- [**Assignment 3 - Validation 풀리퀘스트**](https://github.com/eunseo-kim/wanted-pre-onboarding-fe/pull/3)
+- 이메일과 비밀번호의 유효성을 검사하는 부분을 `src/services`의 `validation.js`에 함수로 분리하여 구현했습니다.
+- 자바스크립트 정규식 중 `test()`, `search()` 메소드를 사용하여 유효성 검사를 구현했습니다.
+- Validation 상태를 CSS로 표현했습니다.
+  1. Email Input Validation Check
+      - input의 onChange 함수가 실행 될 때마다 email의 유효성을 검사했습니다.
+      - `emailValidation`이라는 state를 추가했습니다. email validation check가 모두 통과된 경우, `emailValidation`을 true로 바꾸어주었습니다. `emailValidation`이 true로 바뀌면 email 입력창 오른쪽의 아이콘이 초록색으로 바뀝니다.
+  2. Password Input Validation Check
+      - email 유효성 검사와 마찬가지로 onChange 실행 시 유효성을 검사했습니다. 단 비밀번호 유효성 체크 함수의 경우, 3가지 조건(대문자/특수문자/8자리 이상) 중 통과되지 않은 조건들을 배열(`errorCodes`)로 담아 리턴합니다. 즉, `errorCodes`의 길이가 0이면 password validation check를 모두 통과한 것입니다.
+  3. Email/Password가 등록되어 있는 (Admin)것과 일치하는지
+      - Admin의 email/password 정보를 임시로 `fixtures/admin.js`에 저장해두었습니다.
+      - 입력된 email/password 정보가 Admin과 다를 경우, 우측 상단에 2초동안 Toast Message가 보이도록 구현했습니다. `setTimeout`을 사용해 2초간 `toastMessageVisible`이라는 state의 값을 `true`로 설정하여 구현했습니다.
+- 모든 Validation Check가 통과된 경우 로그인 버튼의 색상이 파란색으로 바뀌고, 버튼의 `cursor`의 속성이 `pointer`으로 바뀌도록 구현했습니다.
 
-\*문의 사항은 사전 과제 Repository의 Issue로 등록해 주세요.
 
-# :: 과제 안내
+### Assignment 4 - Routing
+> 과제를 풀면서 가장 고민을 많이 했던 부분인 것 같습니다. React v6부터 history.push('/')가 navigate('/')로 변경되었습니다. 따라서 **`history push 사용 X`** 이라는 조건을 **`navigate 사용 X`** 으로 이해해서 풀었습니다.
+- [**Assignment 4 - Routing 풀리퀘스트**](https://github.com/eunseo-kim/wanted-pre-onboarding-fe/pull/4)
+- 처음에는 로그인 시 `navigate("/")`로 Main Page로 이동시키고, 로그아웃 시 `navigate("/login")`으로 Login Page 이동하도록 구현했습니다.
+- 그러나, **사용자가 직접 URL을 조작하는 경우**, 로그인이 되어있지 않은 상태인데 Main Page에 접근하는 등의 문제가 발생했습니다.
+- 또한, 페이지 이동 시 매번 localStorage를 확인하자니, 페이지가 렌더링 되고 난 후 localStorage를 접근한다는 문제가 발생했습니다.
+- 따라서, `App.jsx`에 `email`이라는 state를 생성했습니다. `email`의 초기값은 `localStorage에 저장된 email`로 초기화했습니다. 그리고 하위 컴포넌트들에게 `email`을 조작할 수 있는 `setEmail`을 props로 넘겼습니다. 그리고 로그인/로그아웃 시 `setEmail`을 조작하여 `App.jsx`에서 생성한 `email`의 상태를 변경했습니다.
+- 그리고 `App.jsx`에서 라우팅 로직을 구현했습니다. `email`과 react-router-dom의 `Navigate`를 사용하여 구현했습니다. 
+  - ① 로그인이 되어 있는데(`email`이 truthy) Login Page에 접속 → `<Navigate replace to="/"/>`으로 redirect
+  - ② 로그인이 안 되어 있는데(`email`이 falsy) Main Page에 접속 → `<Navigate replace to="/login"/>`으로 redirect
+- 따라서 로그인/로그아웃 시 `email`의 상태를 변경하면 자동으로 위의 ①/②가 실행되어 `navigate("/")` 없이도 페이지를 redirect 시킬 수 있습니다.
 
----
-
-## Assignment 1 - `Login`
-
-- 로그인 컴포넌트를 개발합니다. (최소화 - `input` 2개, `button` 1개)
-- 약간의 랜더링 최적화를 고려해주세요. (Hint: Ref 사용)
-- 로그인 시(ID, PW 입력 후 버튼 클릭)
-  - Local Storage 에 로그인 정보 저장 (다시 접속했을 경우에 정보가 유지 되어야 합니다.)
-  - 메인 페이지로 이동합니다.(로그인이 완료되면)
-  - 반응형 CSS 적용은 하지 않으셔도 좋습니다. 해당 페이지는 반응형 CSS를 평가하지 않습니다.
-
-## Assignment2 - `GNB`
-
-- 로그인 후 이동하는 메인페이지의 GNB를 구현해주세요.
-- 구현 시 스크롤에 관계 없이 화면 상단에 고정되는 `sticky` GNB 를 구현해주세요.
-- 모바일 사이즈의 경우 가운데 Input 창이 사라져야 하고 양옆으로(space-between) 정렬 되어야 합니다.
-- 가장 오른쪽 아이콘을 Logout으로 변경해주세요.
-- 그 외 기능은 평가하지 않습니다.
-  - (가운데 검색바는 `input` 요소로만 만들어주세요. 기능은 X)
-  - (아이콘은 자유롭게 사용하셔도 괜찮습니다. 아이콘 라이브러리 설치 O)
-
-## Assignment3 - `Validation`
-
-- 이메일과 비밀번호의 유효성을 확인합니다.
-  - 이메일 조건 - `@` , `.` 포함
-  - 비밀번호 조건 - 대문자, 숫자, 특수문자 포함 8자리 이상
-  - 로그인 시 이메일과 비밀번호가 등록되어 있는 것과 일치 여부 확인
-- Validation 상태를 CSS로 표현해주세요.
-  - Email Input
-    Validation Check를 통해 Email 형식이 아닌 경우 표시를해주세요. (ex. boder가 red색상으로 변경)
-  - Password Input
-    Validation Check를 통해 Password 형식이 아닌 경우 표시를 해주세요. (ex. boder가 red색상으로 변경.)
-  - Login Button
-    Validation Check가 모두 통과된 경우에만 Button 색상을 진하게 변경해주세요. (통과 되지 못한 경우와 구별이 가능해야 합니다.)
-- 유효성 검사 시 아래 두 가지를 적용해서 구현해주세요.
-  - 정규표현식 사용
-  - Validation 함수 분리
-
-## Assignment4 - `Routing`
-
-- 로그인,로그아웃 시 라우팅 로직을 통해 페이지가 이동 되도록 구현해주세요. (Local Storage)
-- 로그인이 완료되면 라우터에서 Main Page로 이동되어야 합니다. (history push 사용 X)
-- 로그아웃되면 (Local Storage가 삭제되면) Login Page로 이동되어야 합니다.(history push 사용 X)
-
-## Assignment5 - `Feeds`
-
-- 피드 컴포넌트를 개발합니다.
-- 레이아웃을 인스타그램과 동일하게 구현해주시면 됩니다. (픽셀 단위까지 맞추실 필요는 없으나 보기에 자연스럽도록 개발해주세요.)
-- 각 Feed의 정보는 public/data 디렉토리에 json형식으로 구성하여 fetch, axios 등을 이용하여 data를 요청해야 합니다.
-- Feed는 최소 3개이상 랜더링 되도록 구현해주세요.
-- 각각의 Feed에 댓글을 추가할 수 있도록 개발해주세요. (Enter key & 클릭으로 게시 가능하도록)
-- Feed는 화면 중앙에 위치 해야하며 모바일 대응이 가능해야 합니다.
-- 게시 후 Input은 초기화 되어야 합니다.
-- Feed의 이미지는 자유롭게 사용하시되 각각 사이즈가 각각 달라야 합니다. (ex. 정사각형, 세로가 긴 것, 가로가 긴 것 등)
-- Feed Image는 자유롭게 사용하셔도 되지만 필요하시면 아래의 url을 사용하세요.(사이즈를 변경하셔도 됩니다. 같은 사이즈 X)
-  "[https://source.unsplash.com/random/600x500](https://source.unsplash.com/random/600x500)"
-  "[https://source.unsplash.com/random/900x500](https://source.unsplash.com/random/900x500)"
-  "[https://source.unsplash.com/random/700x1080](https://source.unsplash.com/random/700x1080)"
-- Feeds의 Image가 로딩된 후 컴포넌트가 로딩 되도록 Lazy Loading을 구현해 주세요 (로딩바는 없어도 괜찮습니다. Hint: image.onload)
-  - (아이콘은 자유롭게 사용하셔도 괜찮습니다. icon 라이브러리 설치 O)
-  - 메인 Page 전체에 반응형 CSS가 적용 되어있는지 평가합니다. (Media Query 사용)
-
-## 참고 이미지
-
-[참고 이미지 링크](https://bclef25.notion.site/1ed6d5b2192b45eeb4104a67f6a77250)
+### Assignment 5 - Feeds
+- [**Assignment 5 - Feeds 풀리퀘스트**](https://github.com/eunseo-kim/wanted-pre-onboarding-fe/pull/5)
+- `public/data`의 `feed.js`에 피드 데이터를 mocking 했습니다.
+- 각 Feed에 Enter Key/'게시' 버튼 클릭으로 댓글을 추가할 수 있도록 구현했습니다.
+  - `commentList` state를 새로 생성하고, 요청 후 받은 feed data의 댓글(comments) 데이터로 값을 초기화했습니다.
+  - 댓글을 추가하면 `commentList`에 새로운 댓글 데이터를 추가했습니다. Javascript의 펼침연산자(...)를 사용하여 구현했습니다. 
+  - 따라서 `commentList`의 상태가 변경되었으므로 화면이 re-rendering 되어 추가된 댓글을 볼 수 있습니다. 단, 새로고침 시 작성한 댓글이 다 지워지는 문제점이 있습니다.
+- 이미지가 로딩되기 전까지 Feed Component가 보이지 않도록 구현했습니다.
+  - img의 `OnLoad` 함수를 사용했습니다. 
+  - 이미지가 로딩된 후 onLoad 함수 안에서 `imageLoading` state를 false로 바꿉니다.
+  - `imageLoading` state가 false로 바뀌면 feed의 display 속성이 `none → block`으로 변경되어 현재 Feed 컴포넌트가 화면에 보이도록 구현했습니다.
+- 메인 페이지 전체에 반응형 CSS(모바일 480px 기준)를 적용했습니다.
+- Feed의 이미지 크기는 width를 100%으로 맞추었고, height는 max-height(500px)를 넘어갈 경우 `overflow: 'hidden'`을 사용하여 이미지를 잘라내었습니다.
